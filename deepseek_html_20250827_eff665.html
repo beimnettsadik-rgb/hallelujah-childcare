@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hallelujah Childcare</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.5;
+      color: #333;
+      background-color: #fff9f5;
+    }
+    header {
+      background: #FF8C6B;
+      color: white;
+      padding: 12px;
+      text-align: center;
+      position: relative;
+    }
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .logo-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+    h1 {
+      font-size: 1.5rem;
+      margin: 0;
+      text-align: center;
+      flex: 1;
+    }
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+    nav {
+      margin-top: 12px;
+      width: 100%;
+    }
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      flex-direction: row;
+    }
+    nav li {
+      margin: 0 8px;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 6px 10px;
+      border-radius: 3px;
+      transition: background 0.3s;
+      display: block;
+    }
+    nav a:hover, nav a.active {
+      background: rgba(255, 255, 255, 0.2);
+    }
+    h2, h3 {
+      margin-top: 0;
+      margin-bottom: 12px;
+    }
+    .page {
+      display: none;
+      animation: fadeIn 0.5s;
+    }
+    .page.active {
+      display: block;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .hero {
+      text-align: center;
+      padding: 30px 20px;
+      background: linear-gradient(rgba(255, 245, 240, 0.9), rgba(255, 245, 240, 0.9));
+    }
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .about, .contact, .curriculum {
+      max-width: 800px;
+      margin: 25px auto;
+      padding: 0 20px;
+    }
+    .contact, .curriculum {
+      background: #FFF5F0;
+      padding: 18px;
+      border-radius: 8px;
+    }
+    .philosophy-point {
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px dashed #FF8C6B;
+    }
+    .philosophy-point:last-child {
+      border-bottom: none;
+    }
+    .cta-button {
+      display: inline-block;
+      background: #FF8C6B;
+      color: white;
+      padding: 12px 24px;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      margin: 15px 5px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      min-width: 180px;
+      text-align: center;
+    }
+    .cta-button:hover {
+      background: #e67a5a;
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    .badges-container {
+      display: flex;
+      justify-content: center;
+      gap: 15px; /* Reduced from original */
+      flex-wrap: wrap;
+      margin: 25px 15px; /* Added horizontal margin */
+      padding: 0 10px;
+    }
+    .badge {
+      text-align: center;
+      background: #FFF5F0;
+      padding: 12px 10px; /* Reduced horizontal padding */
+      border-radius: 8px;
+      min-width: 160px; /* Adjusted for better spacing */
+      flex: 1;
+      max-width: 220px; /* Added max-width to prevent over-expansion */
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    }
+    .badge i {
+      color: #4CAF50;
+      font-size: 22px;
+      margin-bottom: 8px;
+    }
+    .badge h3 {
+      font-size: 1rem; /* Kept the same size */
+      margin: 0;
+      line-height: 1.3;
+    }
+    footer {
+      background: #333;
+      color: white;
+      text-align: center;
+      padding: 18px;
+      margin-top: 35px;
+    }
+    .form-input {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      box-sizing: border-box;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+    .form-submit {
+      background: #FF8C6B;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      cursor: pointer;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: all 0.3s;
+      width: 100%;
+      font-size: 16px;
+    }
+    .form-submit:hover {
+      background: #e67a5a;
+    }
+    .map-container {
+      margin: 25px 0;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    .map-container iframe {
+      width: 100%;
+      height: 300px;
+      border: 0;
+    }
+    .contact-info {
+      margin: 15px 0;
+    }
+    .contact-info p {
+      margin: 8px 0;
+    }
+    
+    /* Mobile-specific styles */
+    @media (max-width: 768px) {
+      header {
+        padding: 10px;
+      }
+      .logo-container {
+        flex-direction: row;
+      }
+      .menu-toggle {
+        display: block;
+      }
+      nav {
+        display: none;
+        margin-top: 10px;
+        padding: 0;
+      }
+      nav.active {
+        display: block;
+      }
+      nav ul {
+        flex-direction: column;
+      }
+      nav li {
+        margin: 4px 0;
+        text-align: center;
+      }
+      nav a {
+        padding: 10px;
+      }
+      h1 {
+        font-size: 1.4rem;
+        text-align: center;
+        flex: 1;
+        margin: 0 10px;
+      }
+      .hero {
+        padding: 25px 15px;
+      }
+      .hero h2 {
+        font-size: 1.6rem;
+      }
+      .about, .contact, .curriculum {
+        padding: 0 15px;
+        margin: 20px auto;
+      }
+      .badges-container {
+        flex-direction: column;
+        gap: 12px;
+        margin: 25px 20px;
+      }
+      .badge {
+        min-width: auto;
+        width: 100%;
+        max-width: none;
+        padding: 15px;
+      }
+      .cta-button {
+        width: 90%;
+        max-width: 280px;
+        padding: 14px;
+        margin: 10px 0;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      footer {
+        padding: 15px;
+      }
+      footer p {
+        margin: 6px 0;
+      }
+      .map-container iframe {
+        height: 250px;
+      }
+    }
+    
+    /* Larger mobile devices */
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.3rem;
+      }
+      .hero h2 {
+        font-size: 1.4rem;
+      }
+      .cta-button {
+        font-size: 0.9rem;
+      }
+      .map-container iframe {
+        height: 200px;
+      }
+      .badges-container {
+        margin: 25px 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <div class="logo-container">
+        <button class="menu-toggle" id="menuToggle">
+          <i class="fas fa-bars"></i>
+        </button>
+        <h1><i class="fas fa-child"></i> Hallelujah Childcare</h1>
+        <div style="width: 48px;"></div> <!-- Spacer for balance -->
+      </div>
+      <nav id="mainNav">
+        <ul>
+          <li><a href="#" class="nav-link active" data-page="home">Home</a></li>
+          <li><a href="#" class="nav-link" data-page="about">About Us</a></li>
+          <li><a href="#" class="nav-link" data-page="curriculum">Curriculum</a></li>
+          <li><a href="#" class="nav-link" data-page="contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Home Page -->
+  <div id="home" class="page active">
+    <section class="hero">
+      <div class="hero-content">
+        <h2>Welcome to Hallelujah Childcare</h2>
+        <p>At Hallelujah Childcare, we've created a warm, safe, and engaging environment where children can learn, grow, and thrive. We combine play with education to make every day both fun and meaningful.</p>
+      </div>
+    </section>
+
+    <div class="badges-container">
+      <div class="badge">
+        <i class="fas fa-star"></i>
+        <h3>Excel-Rated Provider</h3>
+      </div>
+      <div class="badge">
+        <i class="fas fa-shield-alt"></i>
+        <h3>CPR/First Aid Certified</h3>
+      </div>
+      <div class="badge">
+        <i class="fas fa-certificate"></i>
+        <h3>Licensed & Insured</h3>
+      </div>
+    </div>
+
+    <section class="about">
+      <h2>Our Philosophy</h2>
+      <p>At our family child care, we believe that early childhood is a time of exploration, growth, and development for every child. Our philosophy centers around the belief that every child is unique and deserves a nurturing environment that supports their individual needs. We are committed to providing a balanced program that includes both child-initiated and teacher-directed activities, ensuring a holistic and inclusive learning experience for all children.</p>
+      
+      <div class="philosophy-point">
+        <h3><i class="fas fa-child"></i> 1. Child-Centered Learning</h3>
+        <p>We prioritize each child's unique needs, interests, and developmental stages. Our program fosters curiosity and a love for learning through a balance of child-initiated and teacher-directed activities. Through hands-on experiences, creative play, and meaningful interactions, children are encouraged to explore their world at their own pace. While children have the freedom to choose activities that interest them, teachers also guide learning with structured activities designed to introduce new concepts and skills.</p>
+      </div>
+      
+      <div class="philosophy-point">
+        <h3><i class="fas fa-heart"></i> 2. Nurturing Relationships</h3>
+        <p>Building strong, trusting relationships is at the heart of what we do. We create a warm, safe, and inclusive environment where every child feels valued and understood. By fostering positive relationships with children and their families, we support emotional well-being and encourage social development. Our educators serve as guides and facilitators, offering support and direction when needed while also encouraging independence.</p>
+      </div>
+      
+      <div class="philosophy-point">
+        <h3><i class="fas fa-users"></i> 3. Family Collaboration</h3>
+        <p>We view families as integral partners in a child's education and development. Open communication and collaboration with parents and guardians are essential to ensure that we meet the needs of each child effectively. We work closely with families to understand their child's individual needs and to develop strategies that support their growth, both at home and in our care.</p>
+      </div>
+      
+      <div class="philosophy-point">
+        <h3><i class="fas fa-brain"></i> 5. Holistic Development</h3>
+        <p>Our approach encompasses all areas of development—cognitive, emotional, social, and physical. We provide a balanced program that promotes critical thinking, problem-solving, social skills, and physical health. Activities include a mix of child-initiated exploration and teacher-directed instruction, allowing children to build a well-rounded foundation through both guided learning and independent discovery.</p>
+      </div>
+      
+      <div class="philosophy-point">
+        <h3><i class="fas fa-globe-americas"></i> 6. Respect for Diversity</h3>
+        <p>We celebrate and respect the diversity of our community. Our program includes a variety of perspectives, cultures, and traditions, helping children understand and appreciate differences. We include diverse materials such as books, toys, and lessons that reflect our commitment to inclusivity. We also actively teach children about respect and acceptance, ensuring that every child and family feels respected and included.</p>
+      </div>
+      
+      <div class="philosophy-point">
+        <h3><i class="fas fa-graduation-cap"></i> 7. Professional Growth and Learning</h3>
+        <p>Our team is dedicated to continuous learning and professional development. We stay informed about best practices in early childhood education, including strategies for inclusivity and supporting children with diverse needs. This commitment ensures that we provide the highest quality care and education for every child in our program.</p>
+      </div>
+    </section>
+
+    <div style="text-align: center;">
+      <a href="#" class="cta-button" data-page="curriculum">
+        <i class="fas fa-book-open"></i> View Our Curriculum
+      </a>
+      <a href="#" class="cta-button" data-page="contact">
+        <i class="fas fa-calendar-check"></i> Schedule a Visit
+      </a>
+    </div>
+  </div>
+
+  <!-- About Page -->
+  <div id="about" class="page">
+    <section class="about">
+      <h2>About Us</h2>
+      <p>Hallelujah Childcare began with a simple vision: to create a place where children feel safe, loved, and inspired every single day. As caregivers and parents ourselves, we understand the hopes and worries families have when choosing childcare. That's why our mission goes beyond supervision—we're here to nurture each child's growth with patience, kindness, and encouragement.</p>
+
+      <p>Our experience has taught us that children learn best when they're having fun. At Hallelujah Childcare, play isn't "extra"—it's essential. Through play, kids build confidence, explore new ideas, and discover their unique talents. We design our days to support not just academic learning, but also creativity, social skills, and emotional well-being.</p>
+
+      <p>What truly sets us apart is the family-like environment we've built. We want every parent to feel peace of mind knowing their child is cared for as if they were our own. To us, this isn't just childcare—it's a calling, and a partnership with families to help children shine.</p>
+    </section>
+
+    <div style="text-align: center; margin: 30px 0;">
+      <a href="#" class="cta-button" data-page="curriculum">
+        <i class="fas fa-book-open"></i> Our Curriculum
+      </a>
+      <a href="#" class="cta-button" data-page="contact">
+        <i class="fas fa-calendar-check"></i> Schedule a Tour
+      </a>
+    </div>
+  </div>
+
+  <!-- Curriculum Page -->
+  <div id="curriculum" class="page">
+    <section class="hero">
+      <div class="hero-content">
+        <h2>Our Curriculum</h2>
+        <p>At Hallelujah Family Child Care, we implement a comprehensive curriculum that aligns with Maryland's Early Learning Standards to create a nurturing, stimulating environment for all children.</p>
+      </div>
+    </section>
+
+    <section class="curriculum">
+      <h2>Our Curriculum for Hallelujah Family Child Care</h2>
+      <p>We implement a curriculum that aligns with the Maryland Early Learning Standards and ensures developmentally appropriate practices for all children, from birth to age five. Our lesson planning is guided by a holistic approach that nurtures each child's unique growth and potential. We integrate <em>Healthy Beginnings</em> for infants and toddlers and follow the Maryland Early Learning Standards for preschool-aged children, creating a learning environment that promotes discovery, creativity, and development.</p>
+      
+      <div class="philosophy-point">
+        <h3><i class="fas fa-baby"></i> For Infants and Toddlers (Ages 0-3)</h3>
+        <p>We use Healthy Beginnings to design activities that foster sensory exploration, early language skills, and physical development. Our planning process is responsive to each child's developmental stage, with a focus on creating engaging, playful experiences that build cognitive, motor, and social-emotional skills.</p>
+      </div>
+      
+      <div class="philosophy-point">
+        <h3><i class="fas fa-school"></i> For Preschool-Aged Children (Ages 3-5)</h3>
+        <p>For our preschool-aged children, our curriculum is aligned with the Maryland Early Learning Standards across multiple domains, including literacy, math, science, social-emotional learning, and physical development. Through hands-on, child-centered activities, we encourage exploration, critical thinking, and social interaction, preparing children for their transition to kindergarten and beyond.</p>
+      </div>
+      
+      <div class="philosophy-point">
+        <h3><i class="fas fa-universal-access"></i> Inclusion of Children with Disabilities</h3>
+        <p>Our program is committed to being inclusive and accessible to all children, including those with disabilities. We believe every child is capable of learning and thriving, and we adapt our curriculum and activities to ensure they are inclusive of diverse needs. We work closely with families and, when necessary, collaborate with specialists to provide individualized support and accommodations that allow children with disabilities to participate fully in the learning experience. Our classroom environment, materials, and teaching strategies are designed to promote engagement and success for all learners, ensuring every child can experience the joy of learning.</p>
+      </div>
+      
+      <div class="philosophy-point">
+        <h3><i class="fas fa-history"></i> Historic Curriculum Influence and Alignment</h3>
+        <p>In addition to using the Maryland Early Learning Standards, we incorporate elements from historically significant educational approaches such as High/Scope, Montessori, and Waldorf. These methods, recognized by the Maryland State Department of Education (MSDE), emphasize child-led learning, creativity, and respect for individual development:</p>
+        <ul>
+          <li><strong>High/Scope</strong> guides our focus on active learning, where children engage in hands-on exploration and teachers act as facilitators.</li>
+          <li><strong>Montessori principles</strong> encourage independence and self-directed learning, allowing children to follow their natural interests.</li>
+          <li><strong>Waldorf Education</strong> inspires our integration of the arts, storytelling, and nature-based activities to support holistic child development.</li>
+        </ul>
+        <p>By blending these proven educational philosophies with the Maryland Early Learning Standards, we create a rich, inclusive, and developmentally appropriate learning environment for all children in our care.</p>
+      </div>
+    </section>
+
+    <div style="text-align: center; margin: 30px 0;">
+      <a href="#" class="cta-button" data-page="contact">
+        <i class="fas fa-calendar-check"></i> Schedule a Tour
+      </a>
+    </div>
+  </div>
+
+  <!-- Contact Page -->
+  <div id="contact" class="page">
+    <section class="hero">
+      <div class="hero-content">
+        <h2>Contact Hallelujah Childcare</h2>
+        <p>We'd love to hear from you! Reach out to schedule a visit, ask questions, or learn more about our programs.</p>
+      </div>
+    </section>
+
+    <section class="contact">
+      <h2><i class="fas fa-envelope"></i> Get In Touch</h2>
+      
+      <div class="contact-info">
+        <p><i class="fas fa-phone"></i> <strong>Phone:</strong> (301) 933-0637</p>
+        <p><i class="fas fa-envelope"></i> <strong>Email:</strong> sebletsadik@gmail.com</p>
+        <p><i class="fas fa-map-marker-alt"></i> <strong>Address:</strong> 11924 Valleywood DR, Silver Spring MD 20902</p>
+        <p><i class="fas fa-clock"></i> <strong>Hours:</strong> Monday-Friday, 7:00 AM - 6:00 PM</p>
+      </div>
+
+      <!-- Map Section -->
+      <div class="map-container">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3098.202052431972!2d-77.112923823327!3d39.05947137160915!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89b7cd7d22b7871d%3A0x4a2cc5e0c33976f!2s11924%20Valleywood%20Dr%2C%20Silver%20Spring%2C%20MD%2020902!5e0!3m2!1sen!2sus!4v1724294821774!5m2!1sen!2sus" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+
+      <h3 style="margin-top: 25px;">Send Us a Message</h3>
+      <!-- Form with SSL (https) -->
+      <form action="https://formsubmit.co/sebletsadik@gmail.com" method="POST">
+        <input type="hidden" name="_subject" value="New Inquiry from Hallelujah Childcare">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="text" name="name" placeholder="Your Name" required class="form-input">
+        <input type="email" name="email" placeholder="Your Email" required class="form-input">
+        <input type="tel" name="phone" placeholder="Phone (optional)" class="form-input">
+        <textarea name="message" placeholder="How can we help you?" class="form-input" style="height: 100px;"></textarea>
+        <button type="submit" class="form-submit"><i class="fas fa-paper-plane"></i> Send Message</button>
+      </form>
+    </section>
+
+    <div style="text-align: center; margin: 30px 0;">
+      <div class="badges-container">
+        <div class="badge">
+          <i class="fas fa-certificate"></i>
+          <h3>Fully Licensed</h3>
+        </div>
+        <div class="badge">
+          <i class="fas fa-graduation-cap"></i>
+          <h3>Qualified Staff</h3>
+        </div>
+        <div class="badge">
+          <i class="fas fa-smile"></i>
+          <h3>Happy Kids</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2024 Hallelujah Childcare. All rights reserved.</p>
+    <p style="margin-top: 10px;">
+      <a href="#" style="color: #FF8C6B; text-decoration: none;">Privacy Policy</a> | 
+      <a href="#" style="color: #FF8C6B; text-decoration: none;">Terms of Service</a>
+    </p>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Mobile menu toggle
+      const menuToggle = document.getElementById('menuToggle');
+      const mainNav = document.getElementById('mainNav');
+      
+      if (menuToggle && mainNav) {
+        menuToggle.addEventListener('click', function() {
+          mainNav.classList.toggle('active');
+        });
+      }
+      
+      // Page navigation
+      const navLinks = document.querySelectorAll('.nav-link');
+      const pages = document.querySelectorAll('.page');
+      
+      // Set up navigation
+      navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          const targetPage = this.getAttribute('data-page');
+          
+          // Update active navigation link
+          navLinks.forEach(navLink => navLink.classList.remove('active'));
+          this.classList.add('active');
+          
+          // Show target page, hide others
+          pages.forEach(page => {
+            page.classList.remove('active');
+            if (page.id === targetPage) {
+              page.classList.add('active');
+            }
+          });
+          
+          // Close mobile menu after selection
+          if (mainNav) {
+            mainNav.classList.remove('active');
+          }
+          
+          // Scroll to top
+          window.scrollTo(0, 0);
+        });
+      });
+      
+      // Make CTA buttons work with navigation
+      const ctaButtons = document.querySelectorAll('.cta-button');
+      ctaButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+          if (this.hasAttribute('data-page')) {
+            e.preventDefault();
+            const targetPage = this.getAttribute('data-page');
+            
+            // Update active navigation link
+            navLinks.forEach(navLink => {
+              navLink.classList.remove('active');
+              if (navLink.getAttribute('data-page') === targetPage) {
+                navLink.classList.add('active');
+              }
+            });
+            
+            // Show target page, hide others
+            pages.forEach(page => {
+              page.classList.remove('active');
+              if (page.id === targetPage) {
+                page.classList.add('active');
+              }
+            });
+            
+            // Close mobile menu after selection
+            if (mainNav) {
+              mainNav.classList.remove('active');
+            }
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
